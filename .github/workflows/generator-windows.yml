@@ -16,7 +16,7 @@ on:
       apiServer:
         description: 'API Server'
         required: true
-        default: 'https://rd.mpftomsk.com'
+        default: 'http://rdgen.mpftomsk.com:8000'
         type: string
       custom:
         description: "Custom JSON"
