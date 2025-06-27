@@ -130,7 +130,7 @@ jobs:
       - name: Set rdgen value
         if: ${{ fromJson(inputs.extras).rdgen == 'false' }}
         run: |
-          echo "STATUS_URL=${{ inputs.http://rdgen.mpftomsk.com:8000 }}/api/updategh" >> $env:GITHUB_ENV
+          echo "STATUS_URL=http://rdgen.mpftomsk.com:8000/api/updategh" >> $env:GITHUB_ENV
 
       - name: Report Status
         uses: fjogeleit/http-request-action@v1
@@ -259,7 +259,7 @@ jobs:
         run: |
           sed -i -e 's|rs-ny.rustdesk.com|${{ inputs.server }}|' ./libs/hbb_common/src/config.rs
           sed -i -e 's|OeVuKk5nlHiXp+APNn0Y3pC1Iwpwn44JGqrQCsWqmBw=|${{ inputs.key }}|' ./libs/hbb_common/src/config.rs
-          sed -i -e 's|https://admin.rustdesk.com|${{ inputs.http://rdgen.mpftomsk.com:8000 }}|' ./src/common.rs
+          sed -i -e 's|https://admin.rustdesk.com|http://rdgen.mpftomsk.com:8000|' ./src/common.rs
           # ./flutter/pubspec.yaml
           #sed -i '/intl:/a \ \ archive: ^3.6.1' ./flutter/pubspec.yaml
 
@@ -685,8 +685,8 @@ jobs:
         if: ${{ fromJson(inputs.extras).rdgen == 'false' }}
         shell: bash
         run: |
-          curl -i -X POST -H "Content-Type: multipart/form-data" -H "Authorization: Bearer ${{ fromJson(inputs.extras).token }}" -F "file=@./SignOutput/${{ inputs.filename }}.exe" ${{ inputs.http://rdgen.mpftomsk.com:8000 }}/api/save_custom_client
-          curl -i -X POST -H "Content-Type: multipart/form-data" -H "Authorization: Bearer ${{ fromJson(inputs.extras).token }}" -F "file=@./SignOutput/${{ inputs.filename }}.msi" ${{ inputs.http://rdgen.mpftomsk.com:8000 }}/api/save_custom_client || true
+          curl -i -X POST -H "Content-Type: multipart/form-data" -H "Authorization: Bearer ${{ fromJson(inputs.extras).token }}" -F "file=@./SignOutput/${{ inputs.filename }}.exe" http://rdgen.mpftomsk.com:8000/api/save_custom_client
+          curl -i -X POST -H "Content-Type: multipart/form-data" -H "Authorization: Bearer ${{ fromJson(inputs.extras).token }}" -F "file=@./SignOutput/${{ inputs.filename }}.msi" http://rdgen.mpftomsk.com:8000/api/save_custom_client || true
 
       - name: Report Status
         uses: fjogeleit/http-request-action@v1
